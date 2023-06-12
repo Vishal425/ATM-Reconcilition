@@ -1,0 +1,85 @@
+        // this.serviceUrl = "http://192.168.77.141:45798/";
+        this.serviceUrl = "http://192.168.1.46:45799/";
+
+
+
+user - atmrecon_pay
+pwd - atmrecon_pay
+ip - 192.168.1.89
+database - testing
+
+atmrecon_sav 
+user - atmrecon_sav
+pwd - atmrecon_sav
+ip - 192.168.1.89
+database - testing
+
+
+**SRIKRISHNA**
+
+--dbconn.py
+Database Name – skcbspr
+Server IP     – 97.253.1.37
+Listener      – 1521
+User Name     – atm_recon_new
+
+serviceUrl = "http://192.168.77.141:45801/";
+
+#Create a build in angular using== ng build --base-href=/srikrishna/
+then copy the all files from inside the dist and app folder
+and paste to the new folder name srikrishna present in python service project
+then copy the index template from the srikrishna folder and paste to the templates 
+
+
+#Create Virtual Environment
+python -m venv new-env
+new-env\Scripts\activate.bat
+python server.py
+pip install flask-cors
+pip install cx-Oracle
+pip install numpy pandas
+pip install psycopg2
+pip install flask_restful
+pip install waitress
+pip install pyinstaller
+pyinstaller server.py --onefile --add-data "templates";"templates" --add-data "srikrishna";"srikrishna"
+
+
+
+#####chnage password
+Pr_Reset_Password
+
+
+Enabled	Pi_UserId	Float	1
+Enabled	Pi_OldPassWd	String	Virtual@1
+Enabled	Pi_NewPassWd	String	Virtual11
+Enabled	Pi_TranDate	Date	6/2/2023
+Enabled	Pi_TranTime	String	05:10:10
+Enabled	Pi_RequestFrom	String	CBS
+Enabled	Pi_AppMode	String	ATM
+Enabled	Po_Error	String	
+
+
+**************************
+
+if(inputOldPassword == dbOldPassword ){
+
+if(inputOldPassword != newInputPassword && inputOldPassword != cNewInputPassword)){
+//check for (new && confirmNew)
+	if(newInputPassword == cNewInputPassword){
+		
+		//check for login
+	}else{
+		error-- new and confirm password not match
+	}
+}else{
+
+	error -- old and new does not same
+}
+	
+
+}else{
+		
+	error -- old and password is not match with enter password
+
+}
