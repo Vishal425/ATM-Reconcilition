@@ -1,0 +1,134 @@
+<!-- ===========================================================================================================
+Original Author : Akshay Borje
+Creation Date   : 09/08/2021
+Project Name    : ATM RECONCILATION
+Module Name	    : master
+Page Name       : manual-reconcilation.html
+
+Modify Author   -   Modify Date   - Reason Of Modify
+Akshay B        -   09/08/2021    - Created UI.
+Akshay B        -   11/08/2021    - Updated UI.
+Akshay B        -   14/08/2021    - Updated UI.
+Akshay B        -   19/08/2021    - Updated UI.
+================================================================================================================================== -->
+
+<div class="container py-4">
+    <header class="bg-top bg-gradient text-white">
+        <div class="container">
+            <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h3>Auto Reconcilation</h3>
+            </div>
+        </div>
+    </header>
+    <div class="card border-3">
+        <div class="card-body">
+            <div class="container mt-2">
+                <div class="row justify-content-start">
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation Base Date</mat-label>
+                            <input #datePicker matInput [matDatepicker]="reconBaseDateFourWay" autocomplete="off" [(ngModel)]="dtReconbaseDate" id="reconBaseDateFourWay" maxlength="10" onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+                                                        this.value = v + '/';
+                                                    }" (ngModelChange)="EnableReset()" autofocus>
+                            <mat-datepicker-toggle matSuffix [for]="reconBaseDateFourWay">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #reconBaseDateFourWay></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Switch</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpSwitchType" (ngModelChange)="EnableReset()" (selectionChange)="getReconTypes(drpSwitchType)">
+                                <mat-option *ngFor="let type of switchTypes" [value]="type.PK">
+                                    {{type.TYPE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-8 text-end" id="reconWay" style="font-weight: bold; font-size: 14px; right: 1%;">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation For</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconcilationFor" (ngModelChange)="EnableReset()" (selectionChange)="getReconModes(drpReconcilationFor)">
+                                <mat-option *ngFor="let type of reconcilationTypes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation Mode</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconMode" (ngModelChange)="EnableReset()" (selectionChange)="getReconFileTypes(drpReconcilationFor,drpReconMode)">
+                                <mat-option *ngFor="let type of reconModes" [value]="type.RECON_TYPE">
+                                    {{type.DISCIPTION}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation File Type</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconFileType" (ngModelChange)="EnableReset()" (selectionChange)="selectReconFileType()">
+                                <mat-option *ngFor="let type of reconFileTypes" [value]="type.VALUE">
+                                    {{type.FILE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 text-end" style="margin-top: 10px;">
+                        <button type="submit" class="btn bg-top" [disabled]="isProcessDisabled" (click)="processAutoReconcilation()">Process</button>
+                        <button type="reset" [disabled]="isResetDisable" (click)="resetAllProperties()" class="btn bg-top mx-2">Reset</button>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div Class="col-md-12" *ngIf="showRepeater">
+                            <div class="card repeaterCard">
+                                <div class="container">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <input matInput #input [(ngModel)]="searchValues" name="searchValues" #alphaNumCtrl="ngModel" inputType='alphaNumeric' app-type autocomplete="off" (keyup)="filterTable($any($event.target).value)" />
+                                                </mat-form-field>
+                                                <span class="searchValue">
+                                                    <i class="material-icons"> search </i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <table mat-table [dataSource]="repeaterData" border-collapse class="mat-elevation-z8 table-responsive repeater" matSort #sort="matSort">
+
+                                            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+
+                                                <ng-container>
+                                                    <th style="background-color:#71ddee; color: black;" mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                        {{column}}</th>
+                                                    <td border-left border-right mat-cell *matCellDef="let element">
+                                                        {{element[column]}}
+                                                    </td>
+                                                </ng-container>
+                                            </ng-container>
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;">
+                                            </tr>
+                                            <tr mat-row class="tableRow pointer text-start" *matRowDef="let row; columns: displayedColumns;">
+                                            </tr>
+                                        </table>
+                                        <mat-paginator style="background-color:aliceblue;" #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20, 25]">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

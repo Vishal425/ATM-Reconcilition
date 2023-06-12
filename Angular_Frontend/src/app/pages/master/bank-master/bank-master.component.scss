@@ -1,0 +1,252 @@
+mat-form-field {
+    width: 100%;
+  }
+  //   ===========================================================================================================
+// Original Author : Akshay Borje
+// Creation Date   : 19/01/2021
+// Project Name    : Berar Finance
+// Module Name	    : Master
+// Page Name       : Bank Master
+// Batch Type      : BANKINFO
+
+// Modify Author   -   Modify Date   -  Reason Of Modify
+
+// Akshay B        -   01/02/2021    - Added styles for bank logo
+// Akshay B        -   25/02/2021    - Added styles for bank logo
+// Akshay B        -   03/04/2021    - Added animation fade in fade out for logo actions.
+// Akshay B        -   18/06/2021    - Added styles for Bank logo image.
+// =================================================================================================================
+.profile-user-wid {
+  margin-top: -26px;
+}
+.avatar-md {
+  height: 4.5rem;
+  width: 4.5rem;
+}
+.rounded-circle {
+  border-radius: 50%!important;
+  align-items: center;
+}
+
+.img-thumbnail {
+  position: absolute;
+  left:15%;
+  padding: 0px 10px;
+  background-color: #f8f8fb;
+  border: 1px solid #f6f6f6;
+  border-radius: .25rem;
+  object-fit: cover;
+  height: 100%;
+  width: 50%;
+}
+
+
+.imgAction{
+  cursor: pointer;
+  position: absolute;
+  left:44%;
+  display:inline;
+  top:79%;
+}
+
+ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+ul li {display: table-caption;}
+
+
+.actionItems{
+  display: none;
+}
+
+.actionItemsVisible{
+  border-radius: 25%!important;
+  position: absolute;
+  width: fit-content;
+  height: fit-content !important;
+  bottom: 12%;
+  left: 62%;
+  display: -webkit-inline-box;
+  opacity: 1;
+  transform: scale(1);
+  background: transparent;
+  background-color: #f6f9f6;
+  color: rebeccapurple;
+}
+
+#imgLogo img{
+  object-fit: cover;
+}
+
+.imageModal{
+  width:420px;
+  height:300px;
+}
+
+.fadein, .fadeout {
+  opacity: 0;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+.fadein {
+  opacity: 1;
+}
+
+
+// Image styles
+
+.avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 10px auto 30px;
+}
+
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 19px;
+  z-index: 1;
+  top: 13px;
+}
+.avatar-upload .avatar-zoom {
+  position: absolute;
+  left: 19px;
+  z-index: 1;
+  top: 13px;
+}
+
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+
+
+.avatar-upload .avatar-edit .custom-label {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-left: -129px;
+  margin-top: 84px;
+  border-radius: 100%;
+  background: #3efc78;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-zoom .custom-label {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-left: 105px;
+  margin-top: 84px;
+  border-radius: 100%;
+  background: #3e6afc;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit .upload-image {
+  background:#3ec6fc;
+}
+
+.avatar-upload .avatar-edit .remove-image {
+  background:#3ec6fc;
+}
+
+.avatar-upload .avatar-zoom .zoom-image {
+  background: #3ec6fc;
+}
+
+.avatar-upload .avatar-edit .custom-label:hover {
+  opacity: 1;
+}
+
+.avatar-upload .avatar-zoom .custom-label:hover {
+  opacity: 1;
+}
+
+.avatar-upload .avatar-edit .custom-label:after {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 8px;
+  right: 0;
+  left: 2px;
+  width: 18px;
+}
+
+.avatar-upload .avatar-zoom .custom-label:after {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 8px;
+  right: 0;
+  left: 2px;
+  width: 18px;
+}
+
+.avatar-upload .avatar-edit .upload-image:after {
+  content: url('/assets/svg/edit.svg');
+  margin-left: -128px;
+  margin-top: 80px;
+}
+
+.avatar-upload .avatar-edit .remove-image:after {
+  content: url('/assets/svg/close.svg');
+  margin-left: -128px;
+  margin-top: 80px;
+}
+
+.avatar-upload .avatar-zoom .zoom-image:after {
+  content: url('/assets/svg/zoom.svg');
+  margin-left: 107px;
+  margin-top: 80px;
+}
+
+.avatar-upload .avatar-preview {
+  margin: auto;
+  margin-top: -6%;
+  width: 140px;
+  height: 140px;
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
+  border: 6px solid #fff;
+  -webkit-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+}
+
+.avatar-upload .avatar-preview>div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+sub-section h5 {
+  color: #fff;
+  //font-size: 1rem;
+  //text-align: center;
+  background:#3098f1;
+  //line-height: 55px;
+  //margin: 0;
+  text-align: center;
+  margin-top: -14px;
+  margin-left: -6px;
+  width: 103%;
+}
+
+table {
+  width: 100%;
+}

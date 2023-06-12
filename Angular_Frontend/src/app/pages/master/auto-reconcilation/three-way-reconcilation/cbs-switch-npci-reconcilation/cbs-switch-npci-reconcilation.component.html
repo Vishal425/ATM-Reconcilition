@@ -1,0 +1,61 @@
+<!-- ===========================================================================================================
+Original Author : Akshay Borje
+Creation Date   : 29/07/2021
+Project Name    : ATM RECONCILATION
+Module Name	    : auto-reconcilation
+Page Name       : cbs-switch-npci-reconcilation.html
+
+Modify Author   -   Modify Date   - Reason Of Modify
+Akshay B        -   30/07/2021    - created UI.
+Akshay B        -   03/08/2021    - done model binding
+================================================================================================================================== -->
+
+<div class="container py-4">
+    <div class="card border-3">
+        <div class="card-body">
+            <header class="bg-top bg-gradient text-white">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <h3>Three Way Reconcilation(CBS, SWITCH, NPCI)</h3>
+                    </div>
+                </div>
+            </header>
+            <div class="container mt-2">
+                <div>
+                    <div class="row justify-content-start">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="transDate" class="form-label">Transaction Date :</label>
+                                <input type="date" class="form-control" id="transDate" [(ngModel)]="dtTransactionDate">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="reconBaseDate" class="form-label">Reconcilation Base Date :</label>
+                                <input type="date" class="form-control" id="reconBaseDate"
+                                    [(ngModel)]="dtReconbaseDate">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type :</label>
+                                <select class="form-select" id="type" aria-label="Default select example"
+                                    [(ngModel)]="drpType">
+                                    <option value="1">On Us</option>
+                                    <option value="2">Issuer</option>
+                                    <option value="3">Acquirer</option>
+                                    <option value="4">POS/ECOM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn bg-top"
+                            (click)="processCbsSwitchNpciRecon()">Process</button>
+                        <button type="reset" class="btn bg-top mx-2">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

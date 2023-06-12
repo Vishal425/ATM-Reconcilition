@@ -1,0 +1,110 @@
+// ===========================================================================================================
+// Original Author : Akshay Borje
+// Creation Date   : 09/08/2021
+// Project Name    : ATM RECONCILATION
+// Module Name	   : master
+// Page Name       : auto-reconcilation.scss
+
+// Modify Author   -   Modify Date   - Reason Of Modify
+// ==========================================================================================================
+
+.mat-button-toggle-checked .chkFa {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.mat-button-toggle-checked .chkTr {
+  //  background-color: #2ecc71;
+  background-color: #e74c3c;
+  color: white;
+}
+
+.mat-button-toggle-checked .chkFa {
+  // background-color: #e74c3c;
+  background-color: #2ecc71;
+  color: white;
+}
+
+.mat-button-toggle-checked .chkTr {
+  //  background-color: #2ecc71;
+  background-color: #e74c3c;
+  color: white;
+}
+
+.mat-form-field-infix {
+  width: 80px !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.highlightSelected {
+  //background-color: antiquewhite;
+  background-color: #a2dbfa;
+}
+
+.pd-8 {
+  padding: 2px;
+}
+
+.pt-4,
+.py-4 {
+  padding-top: 0.5rem !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-tab-body {
+  animation: none;
+  opacity: 0;
+}
+
+.mat-header-row,
+.mat-row {
+  min-height: 30px;
+}
+
+.col-sm-2 {
+  max-height: 48px;
+}
+
+.searchValue {
+  position: relative;
+  top: -50%;
+  float: right;
+  font-size: 0px;
+  display: flex;
+}
+
+.repeaterCard {
+  border-style: double;
+  border-color: #515f6e;
+  background-color: aliceblue;
+  border-color: #0ad7f7;
+}
+
+.repeater {
+  margin-top: -2%;
+  display: table;
+}
+
+.mat-header-row,
+.mat-row {
+  min-height: 30px;
+}
+
+.tableRow {
+  min-height: 15px;
+}
+
+tr.mat-header-row {
+  height: 30px;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+  height: 30px;
+}

@@ -1,0 +1,183 @@
+<!-- ===========================================================================================================
+Original Author : Shipra Sambhare
+Creation Date   : 03/08/2021
+Project Name    : ATM RECONCILATION
+Module Name	    : App
+Page Name       : bankMaster.component.html
+
+Modify Author    -   Modify Date   -  Reason Of Modify
+Shipra S     -   03/08/2021    - created UI.
+================================================================================================================================== -->
+
+<div class="container py-4">
+    <header class="bg-top bg-gradient text-white">
+        <div class="container">
+            <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h3>Bank Master</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="card border-3">
+        <div class="card-body pt-0">
+            <div class="container mt-2">
+                <div class="row justify-content-start mt-4">
+                    <div style="display: none;">
+                        <mat-form-field>
+                            <mat-label>Bank Id</mat-label>
+                            <input matInput placeholder="Bank Id" [(ngModel)]="txtBankId"
+                                [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Bank Name</mat-label>
+                                    <input matInput placeholder="Bank Name" #bankName [(ngModel)]="txtBankName"
+                                        [ngModelOptions]="{standalone: true}" autofocus>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Bank Short Name</mat-label>
+                                    <input matInput placeholder="Bank Short Name" [(ngModel)]="txtBankShortName"
+                                        [ngModelOptions]="{standalone: true}">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field>
+                                    <mat-label>Address</mat-label>
+                                    <textarea matInput placeholder="Address" [(ngModel)]="txtAddress"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Bank Type</mat-label>
+                                    <mat-select [(ngModel)]="drpBankType" [ngModelOptions]="{standalone: true}" disableOptionCentering>
+                                        <!-- <input matInput > -->
+                                        <mat-option *ngFor="let bank of tempBanks" [value]="bank.BANK_TYPE">
+                                            {{bank.DESCRIPTION}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="tab-content" style="height: 92%;">
+                                <div class="row">
+                                    <!-- <sub-section> -->
+                                    <h5 style="margin-top: 1px;width: 110%;margin-left: -5%;">
+                                        <mat-label>Bank Logo </mat-label>
+                                    </h5>
+                                    <!-- </sub-section> -->
+                                </div>
+                                <div class="row">
+                                    <div class="avatar-upload">
+                                        <!-- <div class="avatar-zoom" *ngIf="zoomImg || isReadOnly">
+                                            <label [ngClass]="['custom-label', 'zoom-image']" matTooltip="Zoom"></label>
+                                        </div> -->
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                                (change)="convertToBase64($event)" />
+                                            <label for="imageUpload" *ngIf="editImg && !isReadOnly"
+                                                [ngClass]="['custom-label', 'upload-image']"
+                                                matTooltip="Upload"></label>
+                                            <label *ngIf="removeImg" [ngClass]="['custom-label', 'remove-image']"
+                                                (click)="removeImage()" matTooltip="Remove"></label>
+                                        </div>
+
+                                        <div class="avatar-preview">
+                                            <div id="imagePreview"
+                                                [style.backgroundImage]="'url('+ base64ImagePath +')'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #imageModal let-modal>
+                            <div class="modal-header">
+                                <button type="button" class="close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <img [src]=base64ImagePath>
+                        </ng-template>
+                    </div>
+                </div>
+
+
+                <div class="text-end">
+                    <button class="btn bg-top"
+                        [disabled]="!txtBankName && !txtBankShortName && !txtAddress && !drpBankType"
+                        (click)="saveBankMaster()">{{pageMode == 'N' ?
+                        'Submit' : 'Modify'}}</button>
+                    <button class="btn bg-top mx-2"
+                        [disabled]="!txtBankName && !txtBankShortName && !txtAddress && !drpBankType"
+                        (click)="Clear()">Clear</button>
+                    <button class="btn bg-top" *ngIf = "!viewRepeater" (click)="saveBankMaster('show')">Show</button>
+                    <button class="btn bg-top" *ngIf = "viewRepeater" (click)="saveBankMaster('hide')">Hide</button>
+                </div>
+                <!-- </mat-card> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="viewRepeater">
+    <div class="card-body">
+        <div class="mt-4 p-2">
+            <!-- <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">BANK NAME</th>
+                        <th scope="col">BANK SHORT NAME</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of showData">
+                        <th scope="row">{{data.BANK_NAME}}</th>
+                        <td>{{data.BANK_SHORT_NAME}}</td>
+                        <td>
+                            <button mat-icon-button color="accent">
+                                <mat-icon class="mat-18 pointer" (click)="bindValue(data)">system_update
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+                <ng-container matColumnDef="BANK_NAME">
+                    <th mat-header-cell *matHeaderCellDef> BANK NAME </th>
+                    <td mat-cell *matCellDef="let element"> {{element.BANK_NAME}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="BANK_SHORT_NAME">
+                    <th mat-header-cell *matHeaderCellDef>BANK SHORT NAME </th>
+                    <td mat-cell *matCellDef="let element"> {{element.BANK_SHORT_NAME}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="accent">
+                            <mat-icon class="mat-18 pointer" (click)="bindValue(element)">system_update</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>
