@@ -1,0 +1,14 @@
+from datetime import datetime
+import psycopg2
+import cx_Oracle
+
+
+
+
+def psqlPostgresconnection():
+    connection = psycopg2.connect(database="berar", user="postgres", password="Virtual%009", port=5432, host="192.168.1.32")
+    return connection
+
+def psqlOracleconnection():
+    con = cx_Oracle.connect('atm_recon_new', 'atm_recon_new', '10.10.0.11:1521/YDCCPR')
+    print("Database version:", con.version)  
