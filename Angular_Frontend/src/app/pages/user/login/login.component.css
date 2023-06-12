@@ -1,0 +1,149 @@
+.btn-primary {
+  color: #fff;
+  background-color: #fb771a;
+  border-color: #fb771a;
+}
+
+.float-container{
+background-image: linear-gradient(315deg, #515f6e 60%, #A2B29F 0%);
+
+/* background-color: #A2B29F !important; */
+height:100%;
+
+}
+.bottomright {
+position: absolute;
+bottom: 18px;
+right: 16px;
+font-size: 18px;
+color:white
+}
+
+.bottomleft {
+position: absolute;
+bottom: 18px;
+left: 16px;
+font-size: 18px;
+color:black
+}
+
+
+.float-right {
+width: 50%;
+float: right;
+padding: 90px 0 0 103px;
+}
+.float-child {
+width: 50%;
+float: left;
+padding: 40px 0 0 103px;
+
+}  
+.float-child2 {
+width: 85%;
+float: left;
+/* padding: 20px; */
+
+} 
+.float-child1 {
+width: 25%;
+float: right;
+padding-top: 7px;
+
+} 
+/* Add styles to the form container */
+.capchaTxt
+{
+ 
+  font-family: "Luckiest Guy", cursive !important;
+  font-size: 45px;
+  letter-spacing: 10px;
+  width: 85%;
+
+}
+
+
+.capchaBox
+{
+  display: flex;
+  margin-top: 0px;
+  background: #ffffff;
+  box-shadow: 0 0 10px #b9b9b9;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+.btn_Login
+{
+color:#fff!important;
+background-color: #464F41;
+/* background-image: linear-gradient(315deg, #40e7df 0%, #2871c4 74%); */
+font-size: 20px;
+border-radius: 5px;
+}
+
+.form-block{
+border-radius: 16px;
+}
+
+.ControlInput--password {
+  order: 0;
+  padding-right: 50px;
+}
+
+.Control-label--password {
+  order: -1;
+  margin-bottom: -45px; 
+}
+.Control-label--showPassword {
+  width: 32px;
+  position: relative;
+  top: 48px;
+  left: 82%;
+  text-align: right;
+  margin-left: -36px;
+  cursor: pointer
+  
+}
+
+.show-password{
+  display: none;
+}
+ /* // show password checkbox hack */
+ .show-password :checked > ControlInput--password {
+  display: none;
+      -webkit-text-security: disc;
+      -moz-text-security: disc;
+    }
+
+    .show-password :checked > Control-label--showPassword .svg-toggle-password .closed-eye{ 
+    display: none;
+          opacity: 1;
+          transition: opacity 300ms ease, height 400ms ease;
+          width: 4px;
+          height: 44px;
+}
+
+.ControlInput--password {
+      -webkit-text-security: disc;
+      -moz-text-security: disc;
+    }
+    
+  .Control-label--showPassword .svg-toggle-password .closed-eye {
+          opacity: 1;
+          transition: opacity 300ms ease, height 400ms ease;
+          width: 4px;
+          height: 44px;
+    }
+
+    /* // default eye position */
+  .svg-toggle-password {
+    fill: rgba(#008ed6, 50%);
+  }
+
+  .svg-toggle-password .closed-eye {
+    fill: rgba(#008ed6, 50%);
+      opacity: 0;
+      height: 0;
+    }
+  
