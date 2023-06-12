@@ -1,0 +1,247 @@
+<!-- =====================================================================
+Original Author : Shipra Sambhare
+Creation Date   : 12/08/2021
+Project Name    : ATM RECONCIALATION
+Module Name	    : Master
+Page Name       : PDF generate
+Modify Author    -   Modify Date   -  Reason Of Modify
+
+Diksha Shelokar       16/10/21         Changes in Pdf
+===================================================================== -->
+
+
+<div #TABLE>
+  <div class="card">
+    <div style="text-align: center;">
+      <p style="margin-top: 29px;font-size: 25px;color:black;">{{bankName}}</p>
+      <p>{{address}}</p>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4" style="font-size: 23px;padding-top: 14px;padding-left: 55px;">{{heading}}</div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4" style="padding-left: 119px;">
+        <button mat-raised-button class="btn bg-top" type="submit"
+          (click)="exportarPDF(showData.filteredData,'Report')">Generate
+          PDF
+        </button>
+        <button mat-raised-button style="margin-left:10px;" class="btn bg-top" type="submit"
+          (click)="exportarExcel(showData,'Report')">Generate
+          EXCEL
+        </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="!match || !un_match">
+      <div class="col-sm-6">
+          <mat-form-field style="width:100%;">
+              <mat-label>Select File Type</mat-label>
+              <mat-select disableOptionCentering [(ngModel)]="drpSwitchFileType" tabindex="2" (selectionChange)="getFileTypesChange(drpSwitchFileType)">
+                  <mat-option *ngFor="let type of fileTypeArray" [value]="type.fileTypeName">{{type.fileTypeName}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field style="width: 90%;">
+          <input matInput (keyup)="filterTable($event)" placeholder="Filter" #input>
+        </mat-form-field>
+      </div>
+    </div>
+    <p style="margin: 20px 0 0 14px;font-size: 19px;" *ngIf="match">
+      Match Data
+    </p>
+    <div class="card" *ngIf="match">
+      <div class="card-body">
+        <div class="mt-4 p-2">
+          <table id="htmlDataMatch" mat-table [dataSource]="showData11" class="table mat-elevation-z8 table-hover"
+            matSort>
+            <ng-container [matColumnDef]="column" *ngFor="let column of keys">
+              <div>
+                <ng-container>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column.toUpperCase().replaceAll('_',' ')}}
+                  </th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element[column]">
+                      {{element[column]}}
+                    </ng-container>
+                    <ng-container *ngIf="!element[column]">
+                      --
+                    </ng-container>
+                  </td>
+                </ng-container>
+              </div>
+              <div>
+                <!-- <ng-container>
+              <tr *ngIf="total">
+                <td></td>
+                <td> {{total}}</td>
+              </tr>
+              </ng-container> -->
+              </div>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="keys"></tr>
+            <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+          </table>
+          <!-- <mat-paginator [pageSize]="10"></mat-paginator> -->
+
+        </div>
+      </div>
+    </div>
+    <p style="margin: 28px 0 0 14px;font-size: 19px;" *ngIf="un_match">
+      UnMatch Data
+    </p>
+    <div class="card" *ngIf="un_match">
+      <div class="card-body">
+        <div class="mt-4 p-2">
+          <table id="htmlDataUnMatch" mat-table [dataSource]="showData12" class="table mat-elevation-z8 table-hover"
+            matSort>
+            <ng-container [matColumnDef]="column" *ngFor="let column of keys">
+              <div>
+                <ng-container>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column.toUpperCase().replaceAll('_',' ')}}
+                  </th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element[column]">
+                      {{element[column]}}
+                    </ng-container>
+                    <ng-container *ngIf="!element[column]">
+                      --
+                    </ng-container>
+                  </td>
+
+                </ng-container>
+              </div>
+              <div>
+                <!-- <tr *ngIf="total">
+                <td></td>
+                <td> {{total}}</td>
+              </tr> -->
+              </div>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="keys"></tr>
+            <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+          </table>
+          <!-- <mat-paginator [pageSize]="10"></mat-paginator> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="!match || !un_match">
+      <div class="card-body">
+        <div class="mt-4 p-2">
+          <table id="htmlDataMatch" mat-table [dataSource]="showData.filteredData" class="table mat-elevation-z8 table-hover"
+            matSort>
+            <ng-container [matColumnDef]="column" *ngFor="let column of keys">
+              <div>
+                <ng-container>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column.toUpperCase().replaceAll('_',' ')}}
+                  </th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element[column]">
+                      {{element[column]}}
+                    </ng-container>
+                    <ng-container *ngIf="!element[column]">
+                      --
+                    </ng-container>
+                  </td>
+                </ng-container>
+              </div>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="keys"></tr>
+            <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+          </table>
+          <!-- <mat-paginator [pageSize]="10"></mat-paginator> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <table id="htmlDataMatch" class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let key of keys" style="width: 100;">{{key.replaceAll('_', ' ') | titlecase}}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="match">
+      <tr *ngFor="let data of showData">
+        <ng-container *ngIf="data.RECON_FLAG == 'Match'">
+          <td *ngFor="let key of keys" style="width: 100;text-align: center;"> {{data[key]}}</td>
+        </ng-container>
+      </tr>
+      <tr *ngIf="total">
+        <td></td>
+        <td> {{total}}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!match">
+      <tr *ngFor="let data of showData">
+        <ng-container>
+          <td *ngFor="let key of keys" style="width: 100;text-align: center;"> {{data[key]}}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="footer">
+      <tr>
+        <td></td>
+        <td colspan="3" style="width:10px;"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="3" style="width:10px;font-weight: bold;">{{footer}}</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>-->
+
+
+  <!-- <div class="card" >
+  <h2 style="margin: 20px 0 0 0;">
+    Unmatch Data
+  </h2>
+  
+  <table id="htmlDataUnMatch" class="table">
+    <thead>
+      <tr style="border-bottom-width: 2px; border-color: #6C7293;">
+        <th *ngFor="let key of keys" style="width: 100;" style="width: 100;">{{key.replace('_', ' ') | titlecase}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of showData11">
+        <ng-container *ngIf="(data.RECON_FLAG == 'UnMatch')">
+          <td *ngFor="let key of keys" style="width: 100;text-align: center;"> {{data[key]}}</td>
+        </ng-container>
+      </tr>
+      <tr *ngIf="total">
+        <td></td>
+        <td> {{total}}</td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="footer">
+      <tr>
+        <td></td>
+        <td colspan="3" style="width:10px;"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="3" style="width:10px;font-weight: bold;">{{footer}}</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div> -->
+
+
+  <!-- <div class="text-end">
+  <button mat-raised-button class="btn bg-top" type="submit" (click)="exportarPDF(showData,'Report')">Generate
+    PDF
+  </button>
+  <button mat-raised-button style="margin-left:10px;" class="btn bg-top" type="submit" (click)="exportarExcel(showData,'Report')">Generate
+    EXCEL
+  </button>
+</div> -->

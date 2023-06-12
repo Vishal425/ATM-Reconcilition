@@ -1,0 +1,29 @@
+.txt-align{
+    text-align: center;
+   
+}
+.txt-size{
+    width: 5;
+}
+
+.width1{
+    width:100%;
+}
+
+ .table{
+    // border-bottom-color: currentColor;
+    border-bottom-width: 1px;
+ }
+
+
+::ng-deep .mat-sort-header-container {
+    justify-content: center !important;
+}
+
+.show{
+    display:contents;
+}
+
+.hide{
+    display: none !important;
+}
