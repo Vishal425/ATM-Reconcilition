@@ -1,0 +1,148 @@
+<!-- ===========================================================================================================
+Original Author : Ashwini Lamsoge
+Creation Date   : 29/07/2021
+Project Name    : ATM RECONCILATION
+Module Name	    : App
+Page Name       : dashboard.html
+
+Modify Author    -   Modify Date   -  Reason Of Modify
+Ashwini  L       -   29/07/2021    - created UI.
+Akshay B         -   02/08/2021    - Added dynamic master menus.
+Aditya M         -   05/08/2021    - Added menu expansion UI.
+Diksha S          -   05/08/2021    - Changes in UI
+================================================================================================================================== -->
+<div>
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a routerLink="./Home">
+          <img *ngIf="childMenu && childMenu.length > 1" [src]="childMenu[childMenu.length-1].BANK_LOGO" /></a></h1>
+      <nav id="navbar" class="navbar" style="display: block;padding-top: 19px;">
+        <ul *ngIf="childMenu && childMenu.length > 0">
+          <li><a class="nav-link scrollto" routerLink="./Home" (click)="activeLink()"
+              [routerLinkActive]="['active']">{{childMenu[0].CAPTION_NAME}}</a> </li>
+          <li *ngFor="let child of childMenu[0].newMenus" class="dropdown">
+            <span *ngIf="child.newMenus.length > 0" [routerLinkActive]="['active']"
+              [ngClass]="{'activeLink':child.activeRoute == true,'afterreact':child.activeRoute == false}">{{child.CAPTION_NAME}}
+              <i class="bi bi-chevron-down"></i></span>
+            <ul style="margin-bottom: 40%;border-radius: 4px;">
+              <li *ngFor="let subChild of child.newMenus" [ngClass]="{'dropdown':child.activeRoute == true}"><i
+                  class="bi bi-chevron-down"></i>
+                <span *ngIf="subChild.CAPTION_NAME!='Recon Type Master'" class="tab-btn-title route-menus">
+                  <a class="subCls" style="font-size: 12px;" [routerLinkActive]="['active']"
+                    (click)="activeLink(subChild.PARENT_MENU_MST_ID)"
+                    routerLink="./{{subChild.PAGE_NAME}}">{{subChild.CAPTION_NAME}}</a>
+                </span>
+              </li>
+            </ul>
+            <div *ngIf="child.newMenus.length == 0">
+              <a [routerLinkActive]="['active']" (click)="activeLink()"
+                routerLink="./{{child.PAGE_NAME}}">{{child.CAPTION_NAME}} <i class="bi bi-chevron-down"></i></a>
+            </div>
+          </li>
+
+          <button mat-button style="margin-left: 50px;" (click)=logOut()>
+            <!-- <mat-icon style="color:white;">power_settings_new</mat-icon> -->
+            <img src="assets/images/icons8-shutdown-48.png" width="30px" style="background: #0c3a6b">
+          </button>
+        </ul>
+        <div class="d-sm-flex mb-2 align-items-center">
+
+          <span class="ml-auto" style="cursor: pointer;" (click)="changePassword()">
+            <p class="change-pass">Change Password<br>
+              <span>
+                <div style="text-align: right;color:white;font-size: 10px;" *ngIf="workingDate || userName">
+                  {{workingDate | date: 'dd-MM-yyyy'}} &nbsp;| &nbsp; {{userName}}</div>
+              </span>
+            </p>
+          </span>
+        </div>
+
+
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <router-outlet>
+    </router-outlet>
+  </main>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div >
+    <header class="header">
+      <h1 class="header-top">ATM RECONCILIATION</h1>
+      <div class="header-content">
+        <button class="header-avatar">
+          <span class="header-avatar-img"></span>
+          <span class="header-avatar-name" style="text-transform: capitalize;">{{userName.toLowerCase()}}</span>
+        </button>
+      </div>
+    </header>  
+    <main class="main">
+      <nav class="nav">
+        <ul class="tabs">
+          <mat-accordion class="example-headers-align" multi *ngIf="childMenu && childMenu.length > 0">
+            <mat-expansion-panel class="mat-elevation-z0" [expanded]="true" (opened)="setStep(0)">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="route-menus">
+                  <a class="tab-btn-title" routerLink="./Home" >{{childMenu[0].CAPTION_NAME}}</a>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <span>
+                <mat-expansion-panel *ngFor="let child of childMenu[0].newMenus" class="mat-elevation-z0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <span class="tab-btn-title">{{child.CAPTION_NAME}}</span> 
+</mat-panel-title>
+</mat-expansion-panel-header>
+<div *ngFor="let subChild of child.newMenus">
+  <mat-expansion-panel *ngIf="subChild.newMenus.length > 0" class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="tab-btn-title">{{subChild.CAPTION_NAME}}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let grandChild of subChild.newMenus">
+      <div class="tab-btn-title py-3 px-4 route-menus">
+        <a routerLink="./atmrecon/{{grandChild.PAGE_NAME}}" routerLinkActive="active">{{grandChild.CAPTION_NAME}}</a>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>
+<div *ngFor="let subChild of child.newMenus">
+  <div *ngIf="subChild.newMenus.length == 0">
+    <div class="tab-btn-title py-3 px-4 route-menus">
+      <a routerLink="./{{subChild.PAGE_NAME}}">{{subChild.CAPTION_NAME}}</a>
+    </div>
+  </div>
+</div>
+</mat-expansion-panel>
+</span>
+</mat-expansion-panel>
+</mat-accordion>
+</ul>
+</nav>
+<div class="content">
+
+  <router-outlet></router-outlet>
+
+</div>
+</main>
+</div> -->

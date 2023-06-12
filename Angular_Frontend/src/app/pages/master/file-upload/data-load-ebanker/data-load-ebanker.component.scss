@@ -1,0 +1,18 @@
+mat-form-field {
+    width: 100%;
+  }
+ 
+
+
+table {
+  width: 100%;
+}
+
+.hide-table{
+  display: none;
+}
+
+
+::ng-deep .mat-sort-header-container {
+  justify-content: center !important;
+}

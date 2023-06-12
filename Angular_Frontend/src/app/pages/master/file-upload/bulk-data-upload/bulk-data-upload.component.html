@@ -1,0 +1,153 @@
+<div class="container py-4">
+    <header class="bg-top bg-gradient text-white">
+      <div class="container">
+        <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <h3>Bulk File Upload</h3>
+        </div>
+      </div>
+    </header>
+      <div class="card border-3">
+        <div class="card-body pt-0">
+          <div class="container mt-2">
+            <div class="row justify-content-start mt-4">
+              <!-- jdhakjasjdh -->
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label>Switch</mat-label>
+                  <mat-select [(ngModel)]="cbsFileUpload.recon_type_mst_id" disableOptionCentering [disabled]="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">
+                    <mat-option *ngFor="let type of reconIdArray" [value]="type.RECON_TYPE_MST_ID" (click)="newFileMethods('fileFormat',type)">
+                      {{type.TYPE_NAME}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label>Reconciliation For</mat-label>
+                  <mat-select [(ngModel)]="cbsFileUpload.recon_for" disableOptionCentering [disabled]="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">
+                    <mat-option *ngFor="let type of fileFormatTypeArray" [value]="type.KEY" (click)="newFileMethods('rectFlag',type)">
+                      {{type.KEY}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label>Reconciliation Mode</mat-label>
+                  <mat-select [(ngModel)]="cbsFileUpload.recon_mode" disableOptionCentering [disabled]="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">
+                    <mat-option *ngFor="let type of recTypeFlagArray" [value]="type.KEY" (click)="newFileMethods('fileTypeRec',type)">
+                      {{type.VALUE}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label>Reconciliation File Type</mat-label>
+                  <mat-select [(ngModel)]="cbsFileUpload.filename_mst_id"  (selectionChange)="selectChange(cbsFileUpload.filename_mst_id)" disableOptionCentering [disabled]="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">
+                    <mat-option *ngFor="let type of fileTypeRecArray" [value]="type.KEY">
+                      {{type.FILE_NAME}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+                <div class="col-md-7" >
+                  <label>CBS File</label>
+                    <div>
+                      <span class="mb-2">
+                        <!-- <mat-icon style="position: absolute; font-size: 32px;">file_upload</mat-icon>Choose File -->
+                          <input type="file" (change)="getFile($event)" [disabled]="!cbsFileUpload.filename_mst_id" style="width: 93px;" [(ngModel)]="cbsFileUpload.saveFileName" name="saveFileName">
+                      </span>
+                      <span class="m-1" *ngIf="cbsFileUpload.record.length > 0">
+                        <!-- <span *ngFor="let data of this.cbsFileUpload.record">
+                            <span *ngIf="data.name" class="p-2 ml-2 chip">{{data.name}}
+                            <span class="text-right item-center">
+                              <mat-icon (click)="removeFile()">cancel</mat-icon>
+                            </span></span>
+                        </span> -->
+                        <mat-chip-list aria-label="Fish selection">
+                          <ng-container *ngFor="let data of cbsFileUpload.record; let index = index">
+                            <mat-chip *ngIf="data.name">
+                                {{data.name}}
+                                <span class="text-right cancel-chip">
+                                  <mat-icon (click)="removeFile(data,index)">cancel</mat-icon>
+                                </span>
+                            </mat-chip>
+                          </ng-container>
+                      </mat-chip-list>
+                      </span>
+                    </div>
+                    </div>
+                    <div  class="col-md-4" >
+                      <div class="file" *ngFor="let data of fileName">
+                      <mat-label>File Name : {{data.FILE_NAME  }}</mat-label><br/>
+                      <mat-label>Max Recon Date : {{data.MAX_RECON_DATE  }}</mat-label>
+                </div>
+                                
+            </div>
+            <!-- <div class="text-end">
+              <button type="submit" class="btn bg-top" (click)="saveFile(cbsFileUpload)" [disabled]="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">Upload</button>
+              <button type="submit" class="btn bg-top mx-2" (click)="clearCBSUploadData()">Clear</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container" *ngIf="uploadedFile.length > 0">
+      <div class="card border-3">
+        <div class="card-body pt-0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{uploadedFile[0].TEMP_MST_ID}}
+                </td>
+                <td>
+                  <img [src]="uploadedFile[0].TEXT_1" alt="">
+                </td>
+              </tr>
+            </tbody>
+            </table>
+        </div>
+      </div>
+    </div> -->
+  
+    <div class="container" *ngIf="uploadedFileRecords.length > 0 && !uploadedFileRecords[0].status">
+      <div class="card border-3">
+        <div class="card-body pt-0">
+          <div class="m-2">
+            <button type="submit" class="btn bg-top" (click)="processFile()">Process</button>
+          </div>
+          <table class="table table-striped">
+            <thead>
+            <tbody>
+              <tr *ngFor="let data of uploadedFileRecords; let ind = index">
+                <ng-container *ngIf="!data.status">
+                  <td style="color: black;" class="py-0">
+                    {{ind + 1}}.
+                  </td>
+                  <td class="p-2">
+                    <mat-checkbox class="example-margin" (change)="updateRecord($event,data)" [(ngModel)]="data.checked">
+                      <span style="white-space: normal; color: black; font-size: 14px;font-weight: 600;" class="mr-2">{{data.TEMP_MST_ID}},</span>
+                      <span style="white-space: normal; color: black; font-size: 14px;">{{data.TEXT_1}}</span>
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pre>
+            <div *ngFor="let data of uploadedFileRecords">
+              <mat-checkbox class="example-margin" (change)="updateRecord($event,data)" [(ngModel)]="data.checked" *ngIf="!data.status">{{data.TEXT_1}}</mat-checkbox>
+            </div>
+          </pre> -->
+        </div>
+      </div>
+    </div>
+    

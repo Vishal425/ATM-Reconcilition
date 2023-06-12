@@ -1,0 +1,44 @@
+
+.login-form-flex {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   background: #807a7a;
+ }
+
+ mat-form-field {
+  width: 100%;
+}
+
+.box {
+  position: relative;
+  top: 0;
+  opacity: 1;
+  float: left;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+}
+
+table {
+  width: 100%;
+}
+
+.hide-table{
+  display: none;
+}
+
+
+
+
+
+
+
+

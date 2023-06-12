@@ -1,0 +1,170 @@
+<!-- =====================================================================
+Original Author : Diksha Shelokar
+Creation Date   : 19/10/2021
+Project Name    : ATM 
+Module Name	    : Master
+Page Name       : Data Load Ebanker Master
+===================================================================== -->
+
+<div class="container py-4" >
+    <div class="card border-3">
+      <div class="card-body">
+        <div class="bg-color">
+          <h3 style="padding: 10px;color: white;">Data Load From Ebanker Master</h3>
+        </div>
+        <div class="container mt-2">
+          <!-- <form> -->
+          <div class="row justify-content-start">
+            <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>Recon Type Mst Id</mat-label>
+                  <mat-select [(ngModel)]="recon_type_mst_id" disableOptionCentering (selectionChange)="someMethod(recon_type_mst_id)">
+                    <mat-option *ngFor="let type of reconType" [value]="type.RECON_TYPE_MST_ID" >
+                      {{type.TYPE_NAME}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>File Format Type</mat-label>
+                  <mat-select [(ngModel)]="file_format_type" disableOptionCentering>
+                    <mat-option *ngFor="let type of fileFormat" [value]="type.KEY">
+                      {{type.VALUE}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field style="width:100%;">
+                    <mat-label>From date</mat-label>
+                    <input matInput [matDatepicker]="picker1" [(ngModel)]="txtFromDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+                <mat-form-field style="width:100%;">
+                    <mat-label>To date</mat-label>
+                    <input matInput [matDatepicker]="picker2" [(ngModel)]="txtToDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+  
+  
+          </div>
+          <div class="text-end">
+            <button type="submit" [disabled]="!recon_type_mst_id || !file_format_type"  class="btn bg-top" (click)="submit()">Show</button>
+            <button type="submit" class="btn bg-top mx-2" [disabled]="!recon_type_mst_id && !file_format_type" (click)="clear()">Clear</button>
+          </div>
+        
+        </div>
+  
+  
+        <div class="card" [ngClass]="{'hide-table': !viewRepeater}">
+          <div class="card-body">
+            <div class="mt-4 p-2">
+              <table mat-table matSort [dataSource]="fileFormatRepeater" class="mat-elevation-z8">
+                <ng-container matColumnDef="RECON_DET_ID">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> RECON DET ID </th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.RECON_DET_ID">
+                        {{element.RECON_DET_ID}}
+                      </ng-container>
+                      <ng-container *ngIf="!element.RECON_DET_ID">
+                        --
+                      </ng-container> 
+                 </td>
+                </ng-container>
+                <ng-container matColumnDef="CARD_NO">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> CARD NO</th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element"> 
+                    <ng-container *ngIf="element.CARD_NO">
+                        {{element.CARD_NO}}
+                      </ng-container>
+                      <ng-container *ngIf="!element.CARD_NO">
+                        --
+                      </ng-container>
+                     </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="OUR_ACCOUNT_NUMBER">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> OUR ACCOUNT NUMBER </th>
+                  <td style="text-align: center;" mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.OUR_ACCOUNT_NUMBER">
+                        {{element.OUR_ACCOUNT_NUMBER}}
+                      </ng-container>
+                      <ng-container *ngIf="!element.OUR_ACCOUNT_NUMBER">
+                        --
+                      </ng-container> 
+                     </td>
+                </ng-container>
+
+                <ng-container matColumnDef="OUR_ACCOUNT_NAME">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> OUR ACCOUNT NAME </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.OUR_ACCOUNT_NAME">
+                            {{element.OUR_ACCOUNT_NAME}}
+                          </ng-container>
+                          <ng-container *ngIf="!element.OUR_ACCOUNT_NAME">
+                            --
+                          </ng-container> 
+                         </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="RRN_NUMBER">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> RRN NUMBER </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.RRN_NUMBER">
+                            {{element.RRN_NUMBER}}
+                          </ng-container>
+                          <ng-container *ngIf="!element.RRN_NUMBER">
+                            --
+                          </ng-container> 
+                         </td>
+                  </ng-container>
+                  <ng-container matColumnDef="STAN_NUMBER">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> STAN NUMBER </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let element"> 
+                        <ng-container *ngIf="element.STAN_NUMBER">
+                            {{element.STAN_NUMBER}}
+                          </ng-container>
+                          <ng-container *ngIf="!element.STAN_NUMBER">
+                            --
+                          </ng-container>
+                         </td>
+                  </ng-container>
+                  <ng-container matColumnDef="BRANCH_CODE">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> BRANCH CODE </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.BRANCH_CODE">
+                            {{element.BRANCH_CODE}}
+                          </ng-container>
+                          <ng-container *ngIf="!element.BRANCH_CODE">
+                            --
+                          </ng-container> 
+                         </td>
+                  </ng-container> 
+                  <ng-container matColumnDef="BRANCH_NAME">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> BRANCH NAME </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.BRANCH_NAME">
+                            {{element.BRANCH_NAME}}
+                          </ng-container>
+                          <ng-container *ngIf="!element.BRANCH_NAME">
+                            --
+                          </ng-container>  
+                        </td>
+                  </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSize]="10"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

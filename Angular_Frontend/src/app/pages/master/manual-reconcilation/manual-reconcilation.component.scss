@@ -1,0 +1,484 @@
+// ===========================================================================================================
+// Original Author : Akshay Borje
+// Creation Date   : 09/08/2021
+// Project Name    : ATM RECONCILATION
+// Module Name	   : master
+// Page Name       : manual-reconcilation.scss
+
+// Modify Author   -   Modify Date   - Reason Of Modify
+// ==========================================================================================================
+
+.lblToggle {
+  margin-top: -1%;
+  margin-left: auto;
+  font-size: 13px !important;
+}
+
+.mat-button-toggle-checked .chkFa {
+  background: rgb(98 226 153);
+  color: white;
+}
+
+.mat-button-toggle-checked .chkTr {
+  //  background-color: #2ecc71;
+  background: rgb(241 111 97);
+  color: white;
+}
+
+// .mat-button-toggle-checked{
+//   background: #dad2d2
+// }
+
+.toggle {
+  margin: auto;
+  right: 2%;
+}
+
+.mat-button-toggle {
+  font-size: 11px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.highlightSelected {
+  background-color: #a2dbfa;
+}
+
+.pd-8 {
+  padding: 0px;
+}
+
+.tableType {
+  text-align: start;
+  font: bold;
+  color: black;
+}
+
+.selectedRecord {
+  font-size: 13px;
+}
+
+.selectedRecordCount {
+  justify-content: start;
+}
+
+.selectedRecordAmount {
+  justify-content: end;
+}
+
+.tglSameAmount2Way {
+  display: flex;
+  margin-bottom: 5px;
+  left: 29%;
+}
+
+.tglSameAmount3Way {
+  display: flex;
+  margin-bottom: 5px;
+  left: 11%;
+}
+
+.tglSameAmount {
+  display: inline-flex;
+  text-align-last: end;
+  margin-top: -3%;
+  height: 25px;
+  width: 95px;
+}
+
+.searchValue {
+  position: relative;
+  top: -50%;
+  float: right;
+  font-size: 0px;
+  display: flex;
+}
+
+#tglSameAmount {
+  display: -webkit-inline-box;
+  justify-content: end;
+  margin: auto;
+  font-size: 13px;
+  left: -3%;
+}
+
+.repeaterCard {
+  //min-height: 117px;
+  max-height: 2890px;
+  border-style: double;
+  border-color: #515f6e;
+}
+
+.repeaterCardHeader {
+  margin-top: -10px;
+}
+
+.repeaterCardInput {
+  border-style: double;
+}
+
+.repeaterCardInput1 {
+  background-color: aliceblue;
+  border-color: #0ad7f7;
+}
+
+.repeaterCardInput2 {
+  background-color: azure;
+  border-color: #35e0d2;
+}
+
+.repeaterCardInput3 {
+  background-color: floralwhite;
+  border-color: #ffc107;
+}
+
+.repeaterCardInput4 {
+  background-color: honeydew;
+  border-color: #45bd0a;
+}
+
+.matButtonToggleNo {
+  margin-left: -60%;
+}
+
+.tableRow {
+  height: 15px;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+tr.mat-header-row {
+  height: 25px !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.repeater {
+  border: 1px solid;
+  //min-height: 20px;
+  max-height: 2645px;
+  margin-top: -3%;
+}
+
+.repeater1 {
+  border-color: #0ad7f7;
+}
+
+.repeater2 {
+  border-color: #35e0d2;
+}
+
+.repeater3 {
+  border-color: #ffc107;
+}
+
+.repeater4 {
+  border-color: #45bd0a;
+}
+
+mat-button-toggle-group {
+  border-radius: 10px;
+}
+
+.matButtonToggle {
+  margin-top: -4%;
+}
+
+.toggleYes {
+  border-left-style: ridge;
+}
+
+.toggleNo {
+  border-right-style: ridge;
+}
+
+.col-sm-2 {
+  max-height: 48px;
+}
+
+.readOnlyField {
+  pointer-events: none;
+}
+
+.infoIcon {
+  font-size: 15px;
+  margin-bottom: -11%;
+}
+
+::ng-deep .mat-tooltip {
+  display: list-item;
+  font-size: 9px;
+  font-weight: 500;
+  white-space: pre-wrap;
+  color: white !important;
+  background-color: black;
+  border: 1px solid gray;
+  width: 165px;
+  overflow-wrap: anywhere;
+  display: table-cell;
+  border-color: blanchedalmond;
+}
+
+::ng-deep tr.mat-footer-row {
+  border: 1px solid #e7e7e7;
+  font-weight: bold;
+  height: 10px !important;
+}
+
+.paginator {
+  display: flex;
+  font-size: 8px;
+}
+
+.repeaterCardDiv {
+  margin-right: 1%;
+}
+
+.repeaterLength1Width {
+  min-width: 95%;
+}
+
+.repeaterLength2Width {
+  min-width: 45%;
+}
+
+.repeaterLength3Width {
+  min-width: 32%;
+}
+
+.repeaterLength4Width {
+  min-width: 31%;
+}
+
+.mobileScreenWidth {
+  min-width: 90%;
+}
+
+::-webkit-scrollbar {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #59baeb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #59baeb;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #0c3a6b;
+}
+
+/* Buttons */
+::-webkit-scrollbar-button:single-button {
+  background-color: #bbbbbb;
+  display: block;
+  //border-style: solid;
+  height: 9px;
+  width: 10px;
+}
+
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 8px 8px 8px;
+  background-image: url("../../../../assets/images/upArrow.png");
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  border-color: transparent transparent #2a3352 transparent;
+  border-style: 1px;
+}
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 8px 8px 0 8px;
+  background-image: url("../../../../assets/images/downArrow.png");
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  border-color: transparent transparent #2a3352 transparent;
+  border-style: 1px;
+}
+
+/* Left */
+::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  border-width: 0px;
+  display: contents;
+  background-image: url("../../../../assets/images/leftArrow.jpg");
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement:hover {
+  border-color: transparent transparent #2a3352 transparent;
+  border-style: 1px;
+}
+
+/* Right */
+::-webkit-scrollbar-button:single-button:horizontal:increment {
+  border-width: 8px 8px 0 8px;
+  background-image: url("../../../../assets/images/rightArrow.png");
+}
+
+::-webkit-scrollbar-button:horizontal:single-button:increment:hover {
+  border-color: transparent transparent #2a3352 transparent;
+  border-style: 1px;
+}
+
+.repeater1 {
+  &::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.6em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #71ddee;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #53c3d4;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: #4295a1;
+  }
+}
+
+.repeater2 {
+  &::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.6em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #6ff1e7;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #5ad6cc;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: #48a19a;
+  }
+}
+
+.repeater3 {
+  &::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.6em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e6cb7c;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d8bd6e;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: #bda358;
+  }
+}
+
+.repeater4 {
+  &::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.6em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ace98d;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #92ce74;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: #83b46a;
+  }
+}
+
+.pt-4,
+.py-4 {
+  padding-top: 0.5rem !important;
+}
+
+.repeatersRow {
+  display: flex;
+  overflow-x: auto;
+  border: 1px solid;
+  //padding: 5px;1
+  padding: 0px 0px 5px;
+  border-style: outset;
+  background: ghostwhite;
+}
+
+.Flipped,
+.Flipped .Content {
+  transform: rotateX(190deg);
+}
+
+.Content {
+  display: flex;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+::ng-deep .modal-content {
+  margin-left: -35%;
+  width: 180%;
+  overflow: auto;
+  max-height: 325px;
+}

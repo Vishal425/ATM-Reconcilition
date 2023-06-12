@@ -1,0 +1,182 @@
+<div class="container py-4">
+  <header class="bg-top bg-gradient text-white">
+    <div class="container">
+      <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <h3>File Format Configuration</h3>
+      </div>
+    </div>
+  </header>
+  <div class="card border-3">
+    <div class="card-body pt-0">
+      <div class="container mt-2">
+        <!-- <form> -->
+          <div *ngIf="fileFormat.filename_mst_id">
+            <div class="fs-5 fw-bold">File Id: {{fileFormat.filename_mst_id}}</div>
+          </div>
+        <div class="row justify-content-start mt-4">
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Switch</mat-label>
+              <mat-select [(ngModel)]="fileFormat.recon_type_mst_id" disableOptionCentering>
+                <mat-option *ngFor="let type of reconIdArray" [value]="type.RECON_TYPE_MST_ID">
+                  {{type.TYPE_NAME}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>File Name</mat-label>
+              <mat-select [(ngModel)]="fileFormat.file_name" disableOptionCentering>
+                <mat-option *ngFor="let type of fileNameArray" [value]="type.KEY">
+                  {{type.KEY}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>NFS Raw Id</mat-label>
+                    <input matInput placeholder="NFS Raw Id" [(ngModel)]="fileFormat.opflag" (change)="checkDaata($event, fileFormat)">
+                  </mat-form-field>
+                </div> -->
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>File Type</mat-label>
+              <mat-select [(ngModel)]="fileFormat.file_type" disableOptionCentering>
+                <mat-option *ngFor="let type of fileTypeArray" [value]="type.FILE_TYPE">
+                  {{type.DESCRIPTION}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Format Type</mat-label>
+              <mat-select [(ngModel)]="fileFormat.file_format_type" disableOptionCentering>
+                <mat-option *ngFor="let type of fileFormatArray" [value]="type.FILE_FORMAT_TYPE">
+                  {{type.DESCRIPTION}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Reconciliation Flag</mat-label>
+              <mat-select [(ngModel)]="fileFormat.recon_type_flag" disableOptionCentering>
+                <mat-option *ngFor="let type of reconFileFlagArray" [value]="type.RECON_TYPE">
+                  {{type.DISCIPTION}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <!-- <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Field Name</mat-label>
+              <input matInput placeholder="Field Name" [(ngModel)]="fileFormat.file_name">
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="col-md-4">
+                              <mat-form-field>
+                                <mat-label>Short Name</mat-label>
+                                <input matInput placeholder="Short Name" [(ngModel)]="fileFormat.opflag">
+                              </mat-form-field>
+                        </div> -->
+          <!-- <div class="col-md-4">
+                              <mat-form-field>
+                                <mat-label>Length</mat-label>
+                                <input matInput placeholder="Length" [(ngModel)]="fileFormat.opflag">
+                              </mat-form-field>
+                        </div> -->
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Onus Number</mat-label>
+              <input matInput placeholder="Length" [(ngModel)]="fileFormat.onus_number">
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-4">
+                              <mat-form-field>
+                                <mat-label>Type</mat-label>
+                                <select matNativeControl>
+                                  <option selected>Numeric</option>
+                                  <option value="1">Alphabet</option>
+                                  <option value="2">Alpha-Numeric</option>
+                                  <option value="3">Data Type</option>
+                                </select>
+                              </mat-form-field>
+                        </div> -->
+          <!-- <div class="col-md-4">
+                              <mat-form-field>
+                                <mat-label>Position</mat-label>
+                                <input matInput placeholder="Position" [(ngModel)]="fileFormat.opflag">
+                              </mat-form-field>
+                        </div> -->
+          <div class="col-md-4 d-flex">
+            <mat-checkbox class="example-margin m-auto" [(ngModel)]="fileFormat.SEPRATED_flag">Seperated Flag</mat-checkbox>
+            <mat-form-field class="ml-4">
+              <mat-label>Seperated Char</mat-label>
+              <input matInput placeholder="Seperated By" [(ngModel)]="fileFormat.SEPRATED_char">
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-4">
+          </div> -->
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Recon Way</mat-label>
+              <input matInput placeholder="Recon Way" type="tel" [(ngModel)]="fileFormat.RECON_WAY">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4"></div>
+          <!-- <div class="col-md-4 m-auto">
+            <mat-checkbox class="example-margin" [(ngModel)]="fileFormat.recon_type_flag">Active Flag/ Recon Type Flag
+            </mat-checkbox>
+          </div> -->
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn bg-top" (click)="saveFile(fileFormat)">{{modifyClick == true ? 'Modify' : 'Submit'}}</button>
+          <button type="submit" class="btn bg-top mx-2" (click)="clearData()">Clear</button>
+          <button class="btn bg-top" (click)="showRepeater()" [disabled]="fileFormatRepeater && fileFormatRepeater.length == 0">{{viewRepeater ? 'Hide' : 'Show'}}</button>
+        </div>
+        <!-- </form> -->
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="container" [ngClass]="{'hide-table': !viewRepeater}">
+  <table mat-table [dataSource]="fileFormatRepeater" matSort class="mat-elevation-z8 table-hover w-100">
+      <ng-container matColumnDef="FILENAME_MST_ID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> File Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.FILENAME_MST_ID}} </td>
+      </ng-container>
+      <ng-container matColumnDef="FILE_NAME">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> File Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.FILE_NAME}} </td>
+      </ng-container>
+      <ng-container matColumnDef="FILE_FORMAT_TYPE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> File Format Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.FILE_FORMAT_TYPE}} </td>
+      </ng-container>
+      <ng-container matColumnDef="FILE_TYPE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> File Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.FILE_TYPE}} </td>
+      </ng-container>
+      <ng-container matColumnDef="TRANSACTION_DATE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.TRANSACTION_DATE}} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent">
+                <mat-icon class="mat-18 pointer" (click)="bindValue(element)">system_update</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="100"></mat-paginator>
+</div>
