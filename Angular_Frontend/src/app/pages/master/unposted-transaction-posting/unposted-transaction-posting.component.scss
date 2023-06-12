@@ -1,0 +1,136 @@
+// ===========================================================================================================
+// Original Author : Akshay Borje
+// Creation Date   : 13/10/2021
+// Project Name    : ATM RECONCILATION
+// Module Name	   : master
+// Page Name       : unposted-transaction-posting.scss
+
+// Modify Author   -   Modify Date   - Reason Of Modify
+// ==================================================================================================================================
+
+tr.mat-header-row {
+    height: 25px !important;
+}
+
+tr.mat-row {
+    height: 15px !important;
+}
+
+::ng-deep tr.mat-footer-row {
+    border: 1px solid #e7e7e7;
+    font-weight: bold;
+    height: 10px !important;
+}
+
+.paginator {
+    display: flex;
+    font-size: 8px;
+}
+
+#tableRow {
+    height: 15px;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    padding: 0;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.searchValue {
+    position: relative;
+    top: 25%;
+    float: right;
+    font-size: 0px;
+    display: flex;
+    left: -68%;
+}
+
+::-webkit-scrollbar {
+    width: 0.8em;
+    height: 0.8em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #59baeb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1e7dad;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #0c3a6b;
+}
+
+/* Buttons */
+::-webkit-scrollbar-button:single-button {
+    background-color: #bbbbbb;
+    display: block;
+    //border-style: solid;
+    height: 9px;
+    width: 10px;
+}
+
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    border-width: 0 8px 8px 8px;
+    background-image: url("../../../../assets/images/upArrow.png");
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+    border-color: transparent transparent #2a3352 transparent;
+    border-style: 1px;
+}
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    border-width: 8px 8px 0 8px;
+    background-image: url("../../../../assets/images/downArrow.png");
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+    border-color: transparent transparent #2a3352 transparent;
+    border-style: 1px;
+}
+
+/* Left */
+::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    border-width: 0px;
+    display: contents;
+    background-image: url("../../../../assets/images/leftArrow.jpg");
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement:hover {
+    border-color: transparent transparent #2a3352 transparent;
+    border-style: 1px;
+}
+
+/* Right */
+::-webkit-scrollbar-button:single-button:horizontal:increment {
+    border-width: 8px 8px 0 8px;
+    background-image: url("../../../../assets/images/rightArrow.png");
+}
+
+::-webkit-scrollbar-button:horizontal:single-button:increment:hover {
+    border-color: transparent transparent #2a3352 transparent;
+    border-style: 1px;
+}
+
+.repeatersRow {
+    border: 1px solid;
+    padding: 10px 10px 10px;
+    border-style: outset;
+    background: ghostwhite;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}

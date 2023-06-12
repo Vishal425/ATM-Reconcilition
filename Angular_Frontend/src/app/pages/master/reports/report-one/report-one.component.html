@@ -1,0 +1,260 @@
+<!-- =====================================================================
+Original Author : Shipra Sambhare
+Creation Date   : 12/08/2021
+Project Name    : ATM RECONCIALATION
+Module Name	    : Master
+Page Name       : Report one
+Modify Author    -   Modify Date   -  Reason Of Modify
+===================================================================== -->
+<div class="container py-4">
+    <div class="card border-3">
+        <div class="card-body">
+            <header class="bg-top bg-gradient text-white">
+                <div class="container">
+                    <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <h3>{{name}}</h3>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container mt-2" *ngIf="(name != 'RRN AllRECORD Report' && name != 'Recon NonRecon Report' && name != 'Rejected Transaction Report'  && name != 'EJ Log Details Report')">
+                <div class="row justify-content-start mt-4">
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>From date</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="txtFromDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>To date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="txtToDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="btn bg-top" (click)="getReport()">Show</button>
+                </div>
+            </div>
+
+            <div class="container mt-2" *ngIf="name == 'Rejected Transaction Report'">
+                <div class="row justify-content-start mt-4">
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Switch</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpSwitchType" (ngModelChange)="EnableReset()" tabindex="2" (selectionChange)="getReconTypes(drpSwitchType)">
+                                <mat-option *ngFor="let type of switchTypes" [value]="type.PK">
+                                    {{type.TYPE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation For</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconcilationFor" (ngModelChange)="EnableReset()" tabindex="3" (selectionChange)="getReconModes(drpReconcilationFor)">
+                                <mat-option *ngFor="let type of reconcilationTypes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation Mode</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconMode" (ngModelChange)="EnableReset()" tabindex="4" (selectionChange)="getReconFileTypes(drpReconcilationFor,drpReconMode)">
+                                <mat-option *ngFor="let type of reconModes" [value]="type.RECON_TYPE">
+                                    {{type.DISCIPTION}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation File Type</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconFileType" (ngModelChange)="selectReconFileType()" tabindex="5" (selectionChange)="selectReconFileType()">
+                                <mat-option *ngFor="let type of reconFileTypes" [value]="type.KEY">
+                                    {{type.FILE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>From date</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="txtFromDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>To date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="txtToDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="btn bg-top" [disabled]="!drpReconFileType || !drpReconMode || !drpReconcilationFor || !drpSwitchType" (click)="getReport()">Show</button>
+                </div>
+            </div>
+
+            <div class="container mt-2" *ngIf="name == 'Recon NonRecon Report'">
+                <div class="row justify-content-start mt-4">
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Summary Flag</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="summaryFlag">
+                                <mat-option *ngFor="let type of SUMMERY_FLAG" [value]="type.DETAIL_SUMMERY_FLAG">
+                                    {{type.DESCRIPTION}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Switch</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="Switch" (click)="fileFormatCall()">
+                                <mat-option *ngFor="let type of switchFile" [value]="type.RECON_TYPE_MST_ID">
+                                    {{type.TYPE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>File Format Type</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="fileFormatSelected">
+                                <mat-option *ngFor="let type of fileFormat" [value]="type.FILE_FORMAT_TYPE">
+                                    {{type.DESCRIPTION}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Recon Flag</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="reconfileselected">
+                                <mat-option *ngFor="let type of ReconFlag" [value]="type.RECON_FLAG">
+                                    {{type.RECON_FLAG == 'Y' ? 'Yes' : 'No'}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>From date</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="txtFromDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>To date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="txtToDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="btn bg-top" [disabled]="!reconfileselected || !summaryFlag || !fileFormatSelected" (click)="getReport()">Show</button>
+                </div>
+            </div>
+
+            <div class="container mt-2" *ngIf="name == 'RRN AllRECORD Report'">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>RRN Number</mat-label>
+                            <input type="number" maxlength="12" matInput placeholder="RRN Number" [(ngModel)]="rrn_number" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="btn bg-top" [disabled]="!rrn_number" (click)="getReport()">Show</button>
+                </div>
+            </div>
+            <div class="container mt-2" *ngIf="name == 'EJ Log Details Report'">
+                <div class="row justify-content-start mt-4">
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Switch</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpSwitchType" (ngModelChange)="EnableReset()" tabindex="2" (selectionChange)="getEjReconTypes(drpSwitchType)">
+                                <mat-option *ngFor="let type of switchTypes" [value]="type.PK">
+                                    {{type.TYPE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation For</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconcilationFor" (ngModelChange)="EnableReset()" tabindex="3" (selectionChange)="getEjReconModes(drpReconcilationFor)">
+                                <mat-option *ngFor="let type of reconcilationTypes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation Mode</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconMode" (ngModelChange)="EnableReset()" tabindex="4" (selectionChange)="getReconFileTypes(drpReconcilationFor,drpReconMode)">
+                                <mat-option *ngFor="let type of reconModes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>Reconcilation File Type</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconFileType" (ngModelChange)="selectReconFileType()" tabindex="5" (selectionChange)="selectReconFileType()">
+                                <mat-option *ngFor="let type of reconFileTypes" [value]="type.KEY">
+                                    {{type.FILE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>From date</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="txtFromDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field style="width:100%;">
+                            <mat-label>To date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="txtToDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="btn bg-top" [disabled]="!drpReconFileType || !drpReconMode || !drpReconcilationFor || !drpSwitchType" (click)="getReport()">Show</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="showPdf">
+    <app-pdf-generate [showData]='tabledata' [name]='name'></app-pdf-generate>
+</div>

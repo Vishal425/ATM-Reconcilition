@@ -1,0 +1,204 @@
+<!-- ===========================================================================================================
+Original Author : Akshay Borje
+Creation Date   : 13/10/2021
+Project Name    : ATM RECONCILATION
+Module Name	    : master
+Page Name       : unposted-transaction-posting.html
+
+Modify Author   -   Modify Date   - Reason Of Modify
+Akshay B        -   13/10/2021    - Created UI.
+================================================================================================================================== -->
+<div class="container py-4">
+    <header class="bg-top bg-gradient text-white">
+        <div class="container">
+            <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h3>ATM Unposted Transaction</h3>
+            </div>
+        </div>
+    </header>
+    <div class="card border-3">
+        <div class="card-body pt-0">
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation Base Date</mat-label>
+                            <input id="firstIndex" #datePicker matInput [matDatepicker]="reconBaseDateFourWay"
+                                autocomplete="off" [(ngModel)]="dtReconbaseDate" id="reconBaseDateFourWay"
+                                maxlength="10" onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+                                                        this.value = v + '/';
+                                                    }" (ngModelChange)="EnableReset()" tabindex="1">
+                            <mat-datepicker-toggle matSuffix [for]="reconBaseDateFourWay">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #reconBaseDateFourWay></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Switch</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpSwitchType"
+                                (ngModelChange)="EnableReset()" tabindex="2"
+                                (selectionChange)="getReconTypes(drpSwitchType)">
+                                <mat-option *ngFor="let type of switchTypes" [value]="type.PK">
+                                    {{type.TYPE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation For</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconcilationFor"
+                                (ngModelChange)="EnableReset()" tabindex="3"
+                                (selectionChange)="getReconModes(drpReconcilationFor)">
+                                <mat-option *ngFor="let type of reconcilationTypes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation Mode</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconMode"
+                                (ngModelChange)="EnableReset()" tabindex="4"
+                                (selectionChange)="getReconFileTypes(drpReconcilationFor,drpReconMode)">
+                                <mat-option *ngFor="let type of reconModes" [value]="type.KEY">
+                                    {{type.VALUE}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Reconcilation File Type</mat-label>
+                            <mat-select disableOptionCentering [(ngModel)]="drpReconFileType"
+                                (ngModelChange)="selectReconFileType()" tabindex="5"
+                                (selectionChange)="selectReconFileType()">
+                                <mat-option *ngFor="let type of reconFileTypes" [value]="type.KEY">
+                                    {{type.FILE_NAME}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 text-end" style="margin-top: 10px;">
+                        <button type="submit" class="btn bg-top mx-2" [disabled]="isShowDisabled"
+                            (click)="showUnpostedTransactions()" tabindex="6">Show</button>
+                        <button type="submit" class="btn bg-top" [disabled]="isPostDisabled"
+                            (click)="postTransactions()" tabindex="7">Post</button>
+                        <button type="reset" [disabled]="isResetDisable" (click)="resetAllProperties()"
+                            class="btn bg-top mx-2" tabindex="8">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="container" *ngIf="showRepeatersDiv">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="repeatersRow Flipped">
+                            <div class="repeaterCardDiv Content">
+                                <div class="card repeaterCard repeaterCardInput repeaterCardInput1 ">
+                                    <div class="container ">
+                                        <div class="card-body">
+                                            <div *ngIf="showRepeater">
+                                                <div class="row">
+                                                    <header style="background-color: #71ddee;color: black; height:40px;"
+                                                        class="bg-gradient">
+                                                        <div class="container">
+                                                            <div class="d-flex pt-3 flex-wrap align-items-center justify-content-center repeaterCardHeader"
+                                                                style="    margin-top: -1%;">
+                                                                <h3>
+                                                                    {{recondModeName}}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </header>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <mat-form-field>
+                                                            <mat-label>Search</mat-label>
+                                                            <input matInput #input [(ngModel)]="searchValues"
+                                                                name="searchValues" #alphaNumCtrl="ngModel"
+                                                                inputType='alphaNumeric' app-type autocomplete="off"
+                                                                (keyup)="filterTable($any($event.target).value,'Search')"
+                                                                tabindex="9" />
+                                                        </mat-form-field>
+                                                        <span class="searchValue">
+                                                            <i class="material-icons"> search </i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <table mat-table [dataSource]="repeaterData" border-collapse
+                                                            class="mat-elevation-z8 table-responsive repeater repeater1"
+                                                            matSort #sort="matSort"
+                                                            [style.min-height]="repeaterMinHeight">
+
+                                                            <ng-container [matColumnDef]="column"
+                                                                *ngFor="let column of displayedColumns">
+                                                                <div *ngIf="column == 'ACTION'">
+                                                                    <ng-container>
+                                                                        <th style="background-color:#71ddee; color: black;"
+                                                                            mat-header-cell *matHeaderCellDef>
+                                                                            <span><input type="checkbox"
+                                                                                    (click)="checkUncheckAll()"
+                                                                                    [(ngModel)]="checkAll" style="margin-top: 40%;
+                                                                                    margin-left: -40%;">
+                                                                            </span>
+                                                                        </th>
+                                                                        <td border-left border-right mat-cell
+                                                                            *matCellDef="let column"
+                                                                            (click)="selectRecordsToPost(column)">
+                                                                            <input type="checkbox"
+                                                                                [(ngModel)]="column.ACTION"
+                                                                                style="margin-top: 35%; margin-left: -80%;">
+                                                                        </td>
+                                                                    </ng-container>
+                                                                </div>
+                                                                <div *ngIf="column != 'ACTION'">
+                                                                    <ng-container>
+                                                                        <th style="background-color:#71ddee; color: black;"
+                                                                            mat-header-cell mat-header-cell
+                                                                            *matHeaderCellDef mat-sort-header>
+                                                                            {{column}}</th>
+                                                                        <td border-left border-right mat-cell
+                                                                            *matCellDef="let element">
+                                                                            {{element[column]}}
+                                                                        </td>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </ng-container>
+                                                            <tr mat-header-row
+                                                                *matHeaderRowDef="displayedColumns; sticky: true;">
+                                                            </tr>
+                                                            <tr mat-row class="text-center" id="tableRow"
+                                                                *matRowDef="let row; columns: displayedColumns;">
+                                                            </tr>
+                                                        </table>
+                                                        <mat-paginator class="paginator"
+                                                            style="background-color:aliceblue;" #paginator
+                                                            [pageSize]="100"
+                                                            [pageSizeOptions]="[100, 150, 200,250,300,350,400,450,500]">
+                                                        </mat-paginator>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
